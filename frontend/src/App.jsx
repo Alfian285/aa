@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import ResetPassword from './pages/ResetPassword';
 import CreatePoll from './pages/CreatePoll';
+import SpesificPoll from './pages/SpesificPoll';
+
 
 
 const App = () => {

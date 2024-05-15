@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\ResponseFormatter;
 use App\Models\polls;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,13 +66,32 @@ class PollsController extends Controller
     //     //
     // }
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(polls $polls)
-    // {
-    //     //
-    // }
+    /**
+     * Display the specified resource.
+     */
+    public function show(String $poll_id)
+    {
+        // Cari poling berdasarkan ID
+        $poll = polls::find($poll_id);
+
+        // Periksa apakah poling ditemukan
+        if (!$poll) {
+            // Jika tidak ditemukan, kirim respons error
+            return ResponseFormatter::error(null, 'Poll not found', 404);
+        }
+
+        // Ambil semua pilihan (jawaban) terkait dengan poling
+        $choices = $poll->choices()->get();
+
+        // Ubah format tanggal di sini
+        foreach ($choices as $choice) {
+            // Ubah format tanggal menggunakan Carbon
+            $choice->created_at = Carbon::parse($choice->created_at)->format('d-m-Y');
+        }
+
+        // Kirim respons sukses dengan data jawaban yang telah diubah format tanggalnya
+        return ResponseFormatter::success($choices);
+    }
 
     // /**
     //  * Show the form for editing the specified resource.

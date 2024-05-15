@@ -8,6 +8,14 @@ import ShowPoll from './ShowPoll';
 const Home = () => {
   const [Polls, setPolls] = React.useState([]);
     const Navigate = useNavigate();
+    React.useEffect(() => {
+       AuthApi.get("/poll")
+         .then((response) => {
+           setPolls(response.data.data)
+           console.log(Polls);
+         })
+     
+     }, []);
     const Logout = () => {
       AuthApi.post("/logout")
       .then(() => {
@@ -17,13 +25,6 @@ const Home = () => {
       });
   };
   
- React.useEffect(() => {
-    AuthApi.get("/poll")
-      .then((response) => {
-        setPolls(response.data.data)
-      })
-  
-  }, []);
 
     const { user } = React.useContext(UserAuthContext);
     return (
