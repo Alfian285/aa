@@ -19,4 +19,5 @@ Route::post('auth/reset-password', [usersController::class, 'reset']);
 
 // Menetapkan rute untuk endpoint /poll ke PollsController::create
 Route::post('poll', [PollsController::class, 'create'])->middleware("AdminOnly");
+    Route::get("poll", [PollsController::class, 'index']);
 });

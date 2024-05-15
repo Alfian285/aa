@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ResponseFormatter;
 use App\Models\polls;
 
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class PollsController extends Controller
      */
     public function index()
     {
-        return "a";
+        $polls = new polls();
+        return ResponseFormatter::success($polls->all(), "Successfuly getting data");       
     }
 
     // /**

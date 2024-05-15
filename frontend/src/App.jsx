@@ -19,6 +19,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/create-poll" element={<CreatePoll />} />
+          <Route path="/poll/:poll_id" element={<SpesificPoll />} />
 
         </Route>
       </Routes>
